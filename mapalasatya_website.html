@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAPALASATYA STIESI Purwakarta</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body class="bg-green-900 text-white font-sans">
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 bg-green-800">
+    <div class="flex items-center">
+      <img src="logo.png" alt="Logo MAPALASATYA" class="h-16 w-16 mr-4 rounded-full border-2 border-yellow-400" />
+      <div>
+        <h1 class="text-xl font-bold">MAPALASATYA</h1>
+        <p class="text-sm">Mapala Sahitya Ekatama - STIESI Purwakarta</p>
+      </div>
+    </div>
+    <div class="space-x-2">
+      <button onclick="enableEdit()" class="bg-orange-400 text-green-900 px-3 py-1 rounded hover:bg-orange-300">Edit Konten</button>
+      <button onclick="saveEdits()" class="bg-yellow-300 text-green-900 px-3 py-1 rounded hover:bg-yellow-200">Simpan Konten</button>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="bg-orange-500 text-green-900 font-semibold">
+    <ul class="flex flex-wrap justify-center space-x-4 p-3">
+      <li><a href="#beranda" class="hover:underline">Beranda</a></li>
+      <li><a href="#pengurus" class="hover:underline">Profil Pengurus</a></li>
+      <li><a href="#sejarah" class="hover:underline">Sejarah</a></li>
+      <li><a href="#visi" class="hover:underline">Visi & Misi</a></li>
+      <li><a href="#keanggotaan" class="hover:underline">Keanggotaan</a></li>
+      <li><a href="#laporan" class="hover:underline">Laporan Program</a></li>
+      <li><a href="#kontak" class="hover:underline">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- Konten -->
+  <main class="p-6 space-y-12">
+    <section id="beranda" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Selamat Datang di Website MAPALASATYA</h2>
+      <p>Mahasiswa Pecinta Alam Sahitya Ekatama, STIESI Purwakarta.</p>
+    </section>
+
+    <section id="pengurus" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Profil Pengurus</h2>
+      <p>(Data pengurus akan ditambahkan di sini)</p>
+    </section>
+
+    <section id="sejarah" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Sejarah Organisasi</h2>
+      <p>(Tuliskan sejarah lengkap MAPALASATYA di bagian ini)</p>
+    </section>
+
+    <section id="visi" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Visi & Misi</h2>
+      <p>(Visi dan misi organisasi dituliskan di sini)</p>
+    </section>
+
+    <section id="keanggotaan" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Keanggotaan</h2>
+      <p>(Syarat, pendaftaran, dan daftar anggota)</p>
+    </section>
+
+    <section id="laporan" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Laporan Program</h2>
+      <p>(Laporan program kegiatan dan pertanggungjawaban)</p>
+      <input type="file" id="uploadPDF" accept="application/pdf" class="mt-2 block" />
+      <a id="pdfLink" href="laporan.pdf" download class="mt-2 inline-block px-4 py-2 bg-orange-400 text-green-900 rounded shadow hover:bg-orange-300">Download Laporan PDF</a>
+    </section>
+
+    <section id="galeri" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Galeri Kegiatan</h2>
+      <input type="file" id="uploadImage" accept="image/*" class="mb-2 block" />
+      <div id="imagePreview" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+    </section>
+
+    <section id="kontak" contenteditable="false">
+      <h2 class="text-2xl font-bold mb-2">Kontak</h2>
+      <p>Email: mapalasatya@stiesi.ac.id<br />Alamat: Kampus STIESI Purwakarta</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-center p-4 mt-10">
+    <p class="text-sm">&copy; 2025 MAPALASATYA STIESI Purwakarta. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function enableEdit() {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => sec.setAttribute('contenteditable', 'true'));
+      alert('Mode edit aktif. Silakan ubah kontennya langsung.');
+    }
+
+    function saveEdits() {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => {
+        localStorage.setItem(sec.id, sec.innerHTML);
+        sec.setAttribute('contenteditable', 'false');
+      });
+      alert('Konten berhasil disimpan di browser.');
+    }
+
+    window.onload = function () {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => {
+        const saved = localStorage.getItem(sec.id);
+        if (saved) sec.innerHTML = saved;
+      });
+    }
+
+    const uploadPDF = document.getElementById('uploadPDF');
+    const pdfLink = document.getElementById('pdfLink');
+    uploadPDF.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file && file.type === 'application/pdf') {
+        const fileURL = URL.createObjectURL(file);
+        pdfLink.href = fileURL;
+        pdfLink.download = file.name;
+        pdfLink.textContent = 'Download ' + file.name;
+      }
+    });
+
+    const uploadImage = document.getElementById('uploadImage');
+    const imagePreview = document.getElementById('imagePreview');
+    uploadImage.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const imgURL = URL.createObjectURL(file);
+        const img = document.createElement('img');
+        img.src = imgURL;
+        img.className = 'w-full h-40 object-cover rounded shadow';
+        imagePreview.appendChild(img);
+      }
+    });
+  </script>
+</body>
+</html>
