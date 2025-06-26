@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Admin - Mapala Satya</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <main class="login-container">
+    <h1>Login Admin</h1>
+    <input id="username" type="text" placeholder="Username" />
+    <input id="password" type="password" placeholder="Password" />
+    <button onclick="doLogin()">Login</button>
+    <p id="error" style="color: red;"></p>
+  </main>
+
+  <script>
+    function doLogin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      // contoh username dan password admin
+      if (user === "admin" && pass === "123456") {
+        localStorage.setItem('loggedIn', true);
+        window.location.href = "dashboard.html";
+      } else {
+        document.getElementById('error').innerText = "Username atau password salah.";
+      }
+    }
+  </script>
+</body>
+</html>
