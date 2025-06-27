@@ -2,12 +2,53 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>MAPALASATYA STISI Purwakarta</title>
+  <title>MAPALASATYA STIESI Purwakarta</title>
   <link rel="stylesheet" href="./assets/style.css" />
+  <style>
+    header {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: #f8f8f8;
+    }}
+    .logo-wrapper {{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }}
+    .site-title {{
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c3e50;
+    }}
+    nav a {{
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }}
+    .hero {{
+      text-align: center;
+      margin-top: 80px;
+    }}
+    .hero h1 {{
+      font-size: 28px;
+      color: #2c3e50;
+    }}
+    .tagline {{
+      font-style: italic;
+      color: #555;
+      margin-top: 10px;
+    }}
+  </style>
 </head>
 <body>
   <header>
-    <img src="./assets/logo.png" alt="Logo Mapala Satya" height="60" />
+    <div class="logo-wrapper">
+      <img src="./assets/logo.png" alt="Logo Mapala Satya" height="60" />
+      <div class="site-title">MAPALASATYA STIESI Purwakarta</div>
+    </div>
     <nav>
       <a href="index.html">Beranda</a>
       <a href="profil.html">Profil</a>
@@ -19,11 +60,10 @@
   </header>
   <main>
     <section class="hero">
-      <h1>MAPALASATYA STISI Purwakarta</h1>
-      <p>Website resmi Mapala Satya. Konten akan diisi oleh admin.</p>
+      <h1>Selamat datang di Website Resmi Mapalasatya</h1>
+      <p class="tagline">"Bukan Tentang Apa yang Paling Terang, Tapi Tentang Apa Yang Tidak Pernah Padam"</p>
     </section>
   </main>
   <footer>&copy; 2025 Mapala Satya. Semua hak dilindungi.</footer>
 </body>
 </html>
-
